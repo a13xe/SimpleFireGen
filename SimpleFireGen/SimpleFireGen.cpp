@@ -1,8 +1,8 @@
-// SimpleFireGen.cpp : 
-// This program creates a 2D array to represent the fire display, 
-// and starts by filling the bottom row with fire particles. 
-// It then simulates the fire spreading upwards by randomly spreading particles from each cell to neighboring cells. 
-// Finally, it displays the fire using a special ANSI escape sequence to change the color of the fire particles to orange. 
+// SimpleFireGen.cpp :
+// This program creates a 2D array to represent the fire display,
+// and starts by filling the bottom row with fire particles.
+// It then simulates the fire spreading upwards by randomly spreading particles from each cell to neighboring cells.
+// Finally, it displays the fire using a special ANSI escape sequence to change the color of the fire particles to orange.
 
 
 
@@ -11,10 +11,10 @@
 
 
 
-#include <Windows.h>
 #include <iostream>
 #include <chrono>
 #include <thread>
+#include <fstream>
 
 
 
@@ -32,25 +32,45 @@ char palette[NUM_SYMBOLS] = { ' ', '.', ':', '-', '=', '+', '*', '%', '@', '$', 
 
 
 
-void initializeFire() 
+int defOS()
+{
+    /* Windows OS is selected as default */
+    int os = 0; 
+    ofstream f_wind("/usr/lib/systemd");
+    /* if OS is Unix based */
+    if (f_wind.is_open())
+    {
+        os = 1;
+    }
+    /* if OS is Windows */
+    else
+    {
+        os = 0;
+    }
+    return os;
+}
+
+
+
+void initializeFire()
 {
     // Fill the bottom row with maximum intensity
-    for (int i = 0; i < WIDTH; i++) 
+    for (int i = 0; i < WIDTH; i++)
     {
         fire[HEIGHT - 1][i] = NUM_SYMBOLS - 1;
     }
 }
 
-void updateFire() 
+void updateFire()
 {
-    for (int y = 0; y < HEIGHT - 1; y++) 
+    for (int y = 0; y < HEIGHT - 1; y++)
     {
-        for (int x = 0; x < WIDTH; x++) 
+        for (int x = 0; x < WIDTH; x++)
         {
             int decay = rand() % 3;
             int spread = rand() % 3 - 1;
             int newIntensity = fire[y + 1][x - spread] - decay;
-            if (newIntensity < 0) 
+            if (newIntensity < 0)
             {
                 newIntensity = 0;
             }
@@ -59,11 +79,11 @@ void updateFire()
     }
 }
 
-void renderFire() 
+void renderFire()
 {
-    for (int y = 0; y < HEIGHT; y++) 
+    for (int y = 0; y < HEIGHT; y++)
     {
-        for (int x = 0; x < WIDTH; x++) 
+        for (int x = 0; x < WIDTH; x++)
         {
             cout << palette[fire[y][x]];
         }
@@ -71,16 +91,31 @@ void renderFire()
     }
 }
 
-int main() 
+int main()
 {
     initializeFire();
-    while (true) 
+
+    if (defOS() == 0)
     {
-        updateFire();
-        renderFire();
-        this_thread::sleep_for(chrono::milliseconds(50));
-        system("cls"); // Clear the console
+        while (true)
+        {
+            updateFire();
+            renderFire();
+            this_thread::sleep_for(chrono::milliseconds(50));
+            system("cls"); // Clear the console
+        }
     }
+    else
+    {
+        while (true)
+        {
+            updateFire();
+            renderFire();
+            this_thread::sleep_for(chrono::milliseconds(50));
+            system("clear"); // Clear the console
+        }
+    }
+
     return 0;
 }
 
@@ -89,7 +124,7 @@ int main()
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
 // Debug program: F5 or Debug > Start Debugging menu
 
-// Tips for Getting Started: 
+// Tips for Getting Started:
 //   1. Use the Solution Explorer window to add/manage files
 //   2. Use the Team Explorer window to connect to source control
 //   3. Use the Output window to see build output and other messages
