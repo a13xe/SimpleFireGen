@@ -1,3 +1,8 @@
+# Compilers temp files
+.vscode/*
+.dist/*
+.vs/*
+
 # Prerequisites
 *.d
 
