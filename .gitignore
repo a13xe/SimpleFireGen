@@ -2,7 +2,7 @@
 .vscode/*
 .dist/*
 .vs/*
-.64/*
+x64/*
 
 # Prerequisites
 *.d
