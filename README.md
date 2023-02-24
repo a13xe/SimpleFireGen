@@ -3,7 +3,7 @@
 ![Repo](https://img.shields.io/github/repo-size/AlexeyLepov/SimpleFireGen?style=for-the-badge)
 ![LastCommint](https://img.shields.io/github/last-commit/AlexeyLepov/SimpleFireGen?style=for-the-badge)
 
-# Simple console application to generate fire out of given symbols
+# A simple console application for creating fire from given characters.
 
 This program creates a 2D array to represent the fire display, and starts by filling the bottom row with fire particles. 
 It then simulates the fire spreading upwards by randomly spreading particles from each cell to neighboring cells. 
