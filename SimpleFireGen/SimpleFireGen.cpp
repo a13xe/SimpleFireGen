@@ -23,12 +23,13 @@ using namespace std;
 
 const int WIDTH = 32;
 const int HEIGHT = 32;
-const int NUM_SYMBOLS = 11;
+const int NUM_SYMBOLS = 16;
+const int NUM_COLORS = 16;
 
 
 
 int fire[HEIGHT][WIDTH] = { 0 };
-char palette[NUM_SYMBOLS] = { ' ', '.', ':', '-', '=', '+', '*', '%', '@', '$', '#'};
+char symbolsArr[NUM_SYMBOLS] = { ' ', '.', ':', '\'', '\"',  '-', '^', '*', '+', '=', 'x', '%', '&', '@', '$', '#' };
 
 
 
@@ -85,7 +86,7 @@ void renderFire()
     {
         for (int x = 0; x < WIDTH; x++)
         {
-            cout << palette[fire[y][x]];
+            cout << symbolsArr[fire[y][x]];
         }
         cout << endl;
     }
