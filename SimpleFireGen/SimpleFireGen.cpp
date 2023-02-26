@@ -1,13 +1,20 @@
-// SimpleFireGen.cpp :
+////////////////////////////////////////////////////////////////////////////
+// 
+// SimpleFireGen.cpp 
+// @Al.exe
+// 
+////////////////////////////////////////////////////////////////////////////
+// 
 // This program creates a 2D array to represent the fire display,
 // and starts by filling the bottom row with fire particles.
-// It then simulates the fire spreading upwards by randomly spreading particles from each cell to neighboring cells.
-// Finally, it displays the fire using a special ANSI escape sequence to change the color of the fire particles to orange.
-
-
-
-#define NOMINMAX
-#define WIN32_LEAN_AND_MEAN
+// 
+// It then simulates the fire spreading upwards by randomly 
+// spreading particles from each cell to neighboring cells.
+// 
+// Finally, it displays the fire using a special ANSI escape 
+// sequence to change the color of the fire particles to orange.
+// 
+////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -24,15 +31,17 @@ using namespace std;
 const int WIDTH = 32;
 const int HEIGHT = 32;
 const int NUM_SYMBOLS = 16;
-const int NUM_COLORS = 16;
 
 
 
 int fire[HEIGHT][WIDTH] = { 0 };
-char symbolsArr[NUM_SYMBOLS] = { ' ', '.', ':', '\'', '\"',  '-', '^', '*', '+', '=', 'x', '%', '&', '@', '$', '#' };
+char symbolsArr[NUM_SYMBOLS] = { ' ', '.', ':', '\'', '\"',  (char)176, '^', '*', '+', '=', 'x', '%', '&', '@', '$', '#' };
 
 
 
+////////////////////////////////////////////////////////////////////////////
+// check your OS
+////////////////////////////////////////////////////////////////////////////
 int defOS()
 {
     /* Windows OS is selected as default */
@@ -92,8 +101,15 @@ void renderFire()
     }
 }
 
+
+
+
+////////////////////////////////////////////////////////////////////////////
+// initialize application 
+////////////////////////////////////////////////////////////////////////////
 int main()
 {
+    system("Color 06");
     initializeFire();
 
     if (defOS() == 0)
