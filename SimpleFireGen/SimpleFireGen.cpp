@@ -17,12 +17,10 @@
 ////////////////////////////////////////////////////////////////////////////
 
 
-
 #include <iostream>
 #include <chrono>
 #include <thread>
 #include <fstream>
-
 
 
 using namespace std;
@@ -33,33 +31,8 @@ const int HEIGHT = 32;
 const int NUM_SYMBOLS = 16;
 
 
-
 int fire[HEIGHT][WIDTH] = { 0 };
-char symbolsArr[NUM_SYMBOLS] = { ' ', '.', ':', '\'', '\"',  (char)176, '^', '*', '+', '=', 'x', '%', '&', '@', '$', '#' };
-
-
-
-////////////////////////////////////////////////////////////////////////////
-// check your OS
-////////////////////////////////////////////////////////////////////////////
-int defOS()
-{
-    /* Windows OS is selected as default */
-    int os = 0; 
-    ofstream f_wind("/usr/lib/systemd");
-    /* if OS is Unix based */
-    if (f_wind.is_open())
-    {
-        os = 1;
-    }
-    /* if OS is Windows */
-    else
-    {
-        os = 0;
-    }
-    return os;
-}
-
+char symbolsArr[NUM_SYMBOLS] = { ' ', '.', ':', '\'', '\"', ';', '^', '*', '+', '=', 'x', '%', '&', '@', '$', '#'};
 
 
 void initializeFire()
@@ -109,28 +82,14 @@ void renderFire()
 ////////////////////////////////////////////////////////////////////////////
 int main()
 {
-    system("Color 06");
     initializeFire();
 
-    if (defOS() == 0)
+    while (true)
     {
-        while (true)
-        {
-            updateFire();
-            renderFire();
-            this_thread::sleep_for(chrono::milliseconds(50));
-            system("cls"); // Clear the console
-        }
-    }
-    else
-    {
-        while (true)
-        {
-            updateFire();
-            renderFire();
-            this_thread::sleep_for(chrono::milliseconds(50));
-            system("clear"); // Clear the console
-        }
+        updateFire();
+        renderFire();
+        this_thread::sleep_for(chrono::milliseconds(50));
+        if (system("CLS")) system("clear"); // Clear the console
     }
 
     return 0;
