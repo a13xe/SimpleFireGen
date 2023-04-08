@@ -110,9 +110,6 @@ void renderFire()
     ////////////////////////////////////////////////////////////////////////////
     // colored rendering
     ////////////////////////////////////////////////////////////////////////////
-    // Defineing 16 intensity levels and associating each level with a different color using ANSI escape codes. 
-    // Printing each symbol with the appropriate color and reseting the color at the end of each row. 
-    // The ;1 modifier makes the "Dark Gray" text bold.
     int intensityLevels = HEIGHT / 4;
     for (int y = 0; y < HEIGHT; y++)
     {
